@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Investors Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #0077b6;
+            color: #ffffff;
+            padding: 20px 0;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 0;
+        }
+
+        section {
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .investor {
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 10px;
+            padding: 20px;
+            text-align: center;
+            width: 200px;
+        }
+
+        .investor img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+
+        .investor-name {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+
+        .investor-investment {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Investors</h1>
+        <p>Investors are the lifeblood of our company, contributing both capital and expertise to drive our success. Meet the incredible individuals who have invested in our vision.</p>
+    </header>
+    
+    <section id="investor-list">
+        <!-- Investors will be dynamically added here using JavaScript -->
+    </section>
+
+    <script>
+        const investorsData = [
+            { name: "John Doe", investment: 1000000, image: "dummy_male.jpg" },
+            { name: "Jane Smith", investment: 750000, image: "dummy_female.jpg" },
+            { name: "Ali Ahmed", investment: 700000, image: "dummy_male.jpg" },
+            { name: "Farooq", investment: 650000, image: "dummy_male.jpg" },
+            { name: "Babar Azam", investment: 600000, image: "dummy_male.jpg" },
+            { name: "Mushtaq", investment: 550000, image: "dummy_male.jpg" },
+            { name: "Virat Kohli", investment: 500000, image: "dummy_male.jpg" },
+            { name: "Steve Jobs", investment: 450000, image: "dummy_male.jpg" },
+            { name: "Ronaldo", investment: 400000, image: "dummy_male.jpg" },
+            { name: "Messi", investment: 350000, image: "dummy_male.jpg" },
+            { name: "Mbappe", investment: 300000, image: "dummy_male.jpg" },
+            { name: "Noreen", investment: 250000, image: "dummy_female.jpg" },
+            { name: "Marium", investment: 200000, image: "dummy_female.jpg" },
+            { name: "Zeenash", investment: 150000, image: "dummy_female.jpg" }
+        ];
+
+        // Sort investors by investment in ascending order
+        investorsData.sort((a, b) => a.investment - b.investment);
+
+        const investorList = document.getElementById("investor-list");
+
+        investorsData.forEach(investor => {
+            const investorDiv = document.createElement("div");
+            investorDiv.className = "investor";
+
+            const investorImage = document.createElement("img");
+            investorImage.src = investor.image;
+            investorImage.alt = investor.name;
+
+            const investorName = document.createElement("div");
+            investorName.className = "investor-name";
+            investorName.textContent = investor.name;
+
+            const investorInvestment = document.createElement("div");
+            investorInvestment.className = "investor-investment";
+            investorInvestment.textContent = `$${investor.investment}`;
+
+            investorDiv.appendChild(investorImage);
+            investorDiv.appendChild(investorName);
+            investorDiv.appendChild(investorInvestment);
+
+            investorList.appendChild(investorDiv);
+        });
+
+        // Create a JSON file with investor data
+        const jsonData = JSON.stringify(investorsData);
+        const blob = new Blob([jsonData], { type: "application/json" });
+        const downloadLink = document.createElement("a");
+        downloadLink.href = URL.createObjectURL(blob);
+        downloadLink.download = "investors_data.json";
+        downloadLink.innerHTML = "Download JSON File";
+
+        document.body.appendChild(downloadLink);
+    </script>
+</body>
+</html>
